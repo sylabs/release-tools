@@ -1,6 +1,9 @@
 # Release Tools
 
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/sylabs/release-tools?status.svg)](https://pkg.go.dev/github.com/sylabs/release-tools)
 [![Build Status](https://circleci.com/gh/sylabs/release-tools.svg?style=shield)](https://circleci.com/gh/sylabs/workflows/release-tools)
+[![Code Coverage](https://codecov.io/gh/sylabs/release-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/sylabs/release-tools)
+[![Go Report Card](https://goreportcard.com/badge/github.com/sylabs/release-tools)](https://goreportcard.com/report/github.com/sylabs/release-tools)
 
 This module contains common tools used to build, package and release code.
 
