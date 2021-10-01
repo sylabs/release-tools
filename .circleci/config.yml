@@ -7,6 +7,9 @@ executors:
   node:
     docker:
       - image: node:16-slim
+  golangci-lint:
+    docker:
+      - image: golangci/golangci-lint:v1.42-alpine
   golang-previous:
     docker:
       - image: golang:1.16
@@ -25,6 +28,14 @@ jobs:
       - run:
           name: Check for Lint
           command: markdownlint .
+
+  lint-source:
+    executor: golangci-lint
+    steps:
+      - checkout
+      - run:
+          name: Check for Lint
+          command: golangci-lint run
 
   check-go-mod:
     executor: golang-latest
@@ -67,6 +78,7 @@ workflows:
   build-and-test:
     jobs:
       - lint-markdown
+      - lint-source
       - check-go-mod
       - build-source:
           matrix:

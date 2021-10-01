@@ -20,6 +20,7 @@ import (
 	"testing"
 )
 
+//nolint:dupl
 func TestNewBuildCommand(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -71,6 +72,7 @@ func TestNewBuildCommand(t *testing.T) {
 	}
 }
 
+//nolint:dupl
 func TestNewInstallCommand(t *testing.T) {
 	tests := []struct {
 		name     string
