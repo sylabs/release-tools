@@ -1,5 +1,7 @@
 # Release Tools
 
+[![Build Status](https://circleci.com/gh/sylabs/release-tools.svg?style=shield)](https://circleci.com/gh/sylabs/workflows/release-tools)
+
 This module contains common tools used to build, package and release code.
 
 ## Go Version Compatibility
