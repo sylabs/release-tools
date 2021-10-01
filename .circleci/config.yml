@@ -1,9 +1,18 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@3
+
 executors:
   node:
     docker:
       - image: node:16-slim
+  golang-previous:
+    docker:
+      - image: golang:1.16
+  golang-latest:
+    docker:
+      - image: golang:1.17
 
 jobs:
   lint-markdown:
@@ -17,9 +26,53 @@ jobs:
           name: Check for Lint
           command: markdownlint .
 
+  check-go-mod:
+    executor: golang-latest
+    steps:
+      - checkout
+      - run:
+          name: Go Mod Tidy
+          command: go mod tidy
+      - run:
+          name: Check Module Tidiness
+          command: git diff --exit-code -- go.mod go.sum
+
+  build-source:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
+      - checkout
+      - run:
+          name: Build Source
+          command: go build ./...
+
+  unit-test:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
+      - checkout
+      - run:
+          name: Run Unit Tests
+          command: go test -coverprofile cover.out -race ./...
+      - codecov/upload:
+          file: cover.out
+
 workflows:
   version: 2
 
   build-and-test:
     jobs:
       - lint-markdown
+      - check-go-mod
+      - build-source:
+          matrix:
+            parameters:
+              e: ["golang-previous", "golang-latest"]
+      - unit-test:
+          matrix:
+            parameters:
+              e: ["golang-previous", "golang-latest"]
