@@ -23,6 +23,7 @@ import (
 	"github.com/sylabs/release-tools/pkg/git"
 )
 
+// Command represents a go tool command.
 type Command struct {
 	env  map[string]string
 	args []string
