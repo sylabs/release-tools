@@ -2,7 +2,9 @@ linters:
   disable-all: true
   enable:
     - bodyclose
+    - containedctx
     - deadcode
+    - decorder
     - depguard
     - dogsled
     - dupl
@@ -20,7 +22,9 @@ linters:
     - gosec
     - gosimple
     - govet
+    - grouper
     - ineffassign
+    - maintidx
     - misspell
     - nakedret
     - prealloc
